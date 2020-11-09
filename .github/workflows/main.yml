@@ -1,7 +1,7 @@
 name: Build And Publish 
 on:
   push:
-    tags: # 当我们提交代码为tag 是以'v'开头的时候才会触发自动部署到服务端 如 git push --tags
+    tags: # 当我们提交代码为tag 是以'v'开头的时候才会触发自动部署到服务端 如 git push -tag v1.0.0
       - 'v*'
 
 jobs:
@@ -34,15 +34,14 @@ jobs:
         FOLDER: site # The folder the action should deploy.
         CLEAN: true # Automatically remove deleted files from the deploy branch
 
-    # 第二步：发布 Release
-    - name: Create Release # 创建Release，可以在仓库看到一个个版本
-      id: create_release
-      uses: actions/create-release@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 之前GitHub添加的Token
-      with:
-        tag_name: ${{ github.ref }} # (tag)标签名称
-        branch: gh-pages
-        release_name: Release ${{ github.ref }}
-        draft: false # 是否是草稿
-        prerelease: false # 是否是预发布
+    # # 第二步：发布 Release
+    # - name: Create Release # 创建Release，可以在仓库看到一个个版本
+    #   id: create_release
+    #   uses: actions/create-release@master
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # 之前GitHub添加的Token
+    #   with:
+    #     tag_name: ${{ github.ref }} # (tag)标签名称
+    #     release_name: Release ${{ github.ref }}
+    #     draft: false # 是否是草稿
+    #     prerelease: false # 是否是预发布
